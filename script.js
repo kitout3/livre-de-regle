@@ -1,0 +1,1 @@
+const menuBtn=document.getElementById('menuBtn');const sidebar=document.querySelector('.sidebar');menuBtn?.addEventListener('click',()=>sidebar.classList.toggle('open'));document.querySelectorAll('.sidebar a').forEach(a=>a.addEventListener('click',()=>sidebar.classList.remove('open')));document.getElementById('printBtn')?.addEventListener('click',()=>window.print());
