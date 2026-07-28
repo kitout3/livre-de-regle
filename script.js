@@ -21,17 +21,15 @@ async function enrichRulebook(){
   const style=document.createElement('style');
   style.textContent=`
     .stats{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:1rem!important}
-    .stat-icon{margin:0;display:grid;gap:.55rem;place-items:center;padding:.65rem;border:1px solid var(--line);background:#f7f1e5;border-radius:6px;transition:transform .2s ease,box-shadow .2s ease}
-    .stat-icon:hover{transform:translateY(-4px);box-shadow:0 8px 18px rgba(49,42,29,.14)}
-    .stat-picture{width:100%;max-width:220px;aspect-ratio:1.5/1;background-image:url('${statsUrl}');background-size:300% 200%;background-repeat:no-repeat;border-radius:5px}
-    .stat-icon figcaption{font-weight:700;font-size:.9rem}
+    .stats .stat-icon{margin:0!important;display:flex!important;flex-direction:column!important;align-items:center!important;gap:.55rem!important;padding:.65rem!important;border:1px solid var(--line)!important;background:#f7f1e5!important;border-radius:6px!important}
+    .stats .stat-picture{display:block!important;width:100%!important;max-width:220px!important;height:auto!important;aspect-ratio:1/1!important;padding:0!important;border:0!important;background-color:transparent!important;background-image:url('${statsUrl}')!important;background-size:300% 200%!important;background-repeat:no-repeat!important}
+    .stats .stat-icon figcaption{font-weight:700;font-size:.9rem}
     .map-chapter{text-align:center;border-top:5px solid var(--gold)}
     .map-chapter>p{text-align:left}
-    .map-frame{display:block;padding:.65rem;background:#e7e0d3;border:1px solid var(--line);overflow:hidden}
-    .world-map{display:block;width:100%;height:auto;transition:transform .3s ease}
-    .map-frame:hover .world-map{transform:scale(1.015)}
+    .map-frame{display:block;margin:0 auto;padding:.65rem;background:#e7e0d3;border:1px solid var(--line);overflow:auto;max-width:760px}
+    .world-map{display:block;width:100%;height:auto;image-rendering:auto}
     .map-help{text-align:center!important;color:var(--muted);font-size:.86rem;margin-bottom:0}
-    @media(max-width:700px){.stats{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
+    @media(max-width:700px){.stats{grid-template-columns:repeat(2,minmax(0,1fr))!important}.map-frame{padding:.25rem}}
   `;
   document.head.appendChild(style);
 
@@ -49,7 +47,7 @@ async function enrichRulebook(){
     const section=document.createElement('section');
     section.id='carte';
     section.className='chapter map-chapter';
-    section.innerHTML=`<span class="chapter-number">MAP</span><h2>Carte du monde</h2><p>La carte du plateau regroupe les différents biomes, les territoires de difficulté 4, 6 et 8, les campements, les obélisques, les tours de garde, la Cité impériale ainsi que les emplacements des quêtes et des anomalies.</p><a class="map-frame" href="${mapUrl}" target="_blank" rel="noopener" title="Ouvrir la carte en grand"><img class="world-map" src="${mapUrl}" alt="Carte complète du plateau de jeu"></a><p class="map-help">Cliquez sur la carte pour l’ouvrir en grand.</p>`;
+    section.innerHTML=`<span class="chapter-number">MAP</span><h2>Carte du monde</h2><p>La carte du plateau regroupe les différents biomes, les territoires de difficulté 4, 6 et 8, les campements, les obélisques, les tours de garde, la Cité impériale ainsi que les emplacements des quêtes et des anomalies.</p><a class="map-frame" href="${mapUrl}" target="_blank" rel="noopener" title="Ouvrir la carte en grand"><img class="world-map" src="${mapUrl}" alt="Carte complète du plateau de jeu"></a><p class="map-help">Cliquez sur la carte pour l’ouvrir séparément.</p>`;
     main.prepend(section);
   }
 
