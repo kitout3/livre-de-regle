@@ -22,14 +22,14 @@ async function enrichRulebook(){
   style.textContent=`
     .stats{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:1rem!important}
     .stats .stat-icon{margin:0!important;display:flex!important;flex-direction:column!important;align-items:center!important;gap:.55rem!important;padding:.65rem!important;border:1px solid var(--line)!important;background:#f7f1e5!important;border-radius:6px!important}
-    .stats .stat-picture{display:block!important;width:100%!important;max-width:220px!important;height:auto!important;aspect-ratio:1/1!important;padding:0!important;border:0!important;background-color:transparent!important;background-image:url('${statsUrl}')!important;background-size:300% 200%!important;background-repeat:no-repeat!important}
+    .stats .stat-picture{display:block!important;width:70%!important;max-width:154px!important;height:auto!important;aspect-ratio:1/1!important;padding:0!important;border:0!important;background-color:transparent!important;background-image:url('${statsUrl}')!important;background-size:300% 200%!important;background-repeat:no-repeat!important}
     .stats .stat-icon figcaption{font-weight:700;font-size:.9rem}
     .map-chapter{text-align:center;border-top:5px solid var(--gold)}
     .map-chapter>p{text-align:left}
-    .map-frame{display:block;margin:0 auto;padding:.65rem;background:#e7e0d3;border:1px solid var(--line);overflow:auto;max-width:760px}
+    .map-frame{display:block;margin:0 auto;padding:.65rem;background:#e7e0d3;border:1px solid var(--line);overflow:auto;width:70%;max-width:532px}
     .world-map{display:block;width:100%;height:auto;image-rendering:auto}
     .map-help{text-align:center!important;color:var(--muted);font-size:.86rem;margin-bottom:0}
-    @media(max-width:700px){.stats{grid-template-columns:repeat(2,minmax(0,1fr))!important}.map-frame{padding:.25rem}}
+    @media(max-width:700px){.stats{grid-template-columns:repeat(2,minmax(0,1fr))!important}.map-frame{padding:.25rem;width:70%}}
   `;
   document.head.appendChild(style);
 
