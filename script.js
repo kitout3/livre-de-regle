@@ -4,6 +4,17 @@ menuBtn?.addEventListener('click',()=>sidebar.classList.toggle('open'));
 document.querySelectorAll('.sidebar a').forEach(a=>a.addEventListener('click',()=>sidebar.classList.remove('open')));
 document.getElementById('printBtn')?.addEventListener('click',()=>window.print());
 
+function harmonizeCharacterText(){
+  document.querySelectorAll('.character').forEach(card=>{
+    const title=card.querySelector('h3')?.textContent.trim();
+    if(title==='Vicaire'){
+      card.querySelectorAll('li').forEach(li=>{
+        li.innerHTML=li.innerHTML.replace('le Vicaire pioche une carte','il pioche une carte');
+      });
+    }
+  });
+}
+
 async function loadBase64(path){
   const response=await fetch(path,{cache:'no-store'});
   if(!response.ok) throw new Error(`Impossible de charger ${path}`);
@@ -60,4 +71,5 @@ async function enrichRulebook(){
   }
 }
 
+harmonizeCharacterText();
 enrichRulebook().catch(error=>console.error('Chargement des visuels impossible :',error));
