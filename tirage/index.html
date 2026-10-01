@@ -7,8 +7,8 @@
   <meta name="description" content="Piochez vos cartes Quête et Anomalie et résolvez l’Altération selon le nombre de joueurs, à partir du livre de règles.">
   <title>La table des tirages · Quêtes & Anomalies</title>
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23111e24'/%3E%3Crect x='8' y='4' width='17' height='24' rx='3' fill='none' stroke='%23d8b477' stroke-width='2'/%3E%3Cpath d='M16.5 10 21 16l-4.5 6L12 16Z' fill='%23d8b477'/%3E%3C/svg%3E">
-  <link rel="stylesheet" href="style.css">
-  <script type="module" src="app.mjs"></script>
+  <link rel="stylesheet" href="style.css?v=2">
+  <script type="module" src="app.mjs?v=2"></script>
 </head>
 <body>
   <header class="topbar">
@@ -17,12 +17,6 @@
   </header>
   <main class="shell">
     <div class="page-title"><div><p class="eyebrow">Compagnon de partie</p><h1>La table des tirages</h1></div><button id="restart-draws" class="primary-button restart-button" type="button">Recommencer les tirages</button></div>
-    <section class="table-settings" aria-label="Configuration de la table">
-      <div class="setting"><label for="player-count">Joueurs à la table</label><div class="stepper"><button id="minus-player" aria-label="Retirer un joueur">−</button><input id="player-count" type="number" value="4" min="2" max="48" inputmode="numeric"><button id="plus-player" aria-label="Ajouter un joueur">+</button></div></div>
-      <div class="setting current-player"><label for="active-player" id="active-label">Joueur qui pioche</label><select id="active-player"></select></div>
-      <button id="edit-players" class="quiet-button settings-button">Nommer les joueurs</button>
-      <div class="save-state" id="save-state">Partie sauvegardée<br>sur cet appareil</div>
-    </section>
     <nav class="mode-tabs" role="tablist" aria-label="Type de tirage">
       <button id="tab-quete" role="tab" aria-controls="play-area" aria-selected="true" data-mode="quete"><span aria-hidden="true">◇</span> Quêtes <small id="quest-count">24</small></button>
       <button id="tab-anomalie" role="tab" aria-controls="play-area" aria-selected="false" tabindex="-1" data-mode="anomalie"><span aria-hidden="true">✧</span> Anomalies <small id="anomaly-count">48</small></button>
@@ -30,19 +24,18 @@
     </nav>
     <section id="play-area" role="tabpanel" aria-labelledby="tab-quete" tabindex="0"></section>
     <section class="bottom-section">
-      <details class="journal" id="journal"><summary>Journal de la partie <span id="history-count">0 tirage</span></summary><div id="history-list"></div></details>
+      <details class="journal" id="journal"><summary>Historique des tirages <span id="history-count">0 carte</span></summary><div id="history-list"></div></details>
       <details class="help"><summary>Comment fonctionnent les tirages ?</summary><div class="help-content">
-        <h2>L’Altération</h2><p>À chaque palier de la fresque, révélez autant de cartes Anomalie que de joueurs. Le déclencheur choisit en premier, puis chaque joueur choisit une carte restante. L’effet s’applique immédiatement.</p>
-        <p>Pour <strong>2 Points de Victoire placés dans la chambre forte</strong>, le joueur peut appliquer l’effet choisi à <strong>tous les joueurs, lui compris</strong>. Déposez ces points sur votre plateau : l’application n’en tient pas le compte.</p>
-        <h2>Joueur actuel, suivant ou précédent</h2><p>La cible est calculée depuis le joueur qui pioche ou qui choisit sa carte. Renseignez les joueurs dans l’ordre de jeu ; le déclencheur commence l’Altération, puis le choix suit cet ordre. Les pouvoirs de personnage restent à appliquer sur le plateau.</p>
+        <h2>Tirer les cartes</h2><p>Ouvrez Quêtes ou Anomalies et cliquez sur le bouton de tirage. Dans Altération, indiquez le nombre de joueurs pour révéler autant d’anomalies en une fois. Vous pouvez enchaîner les tirages librement.</p>
+        <p>Les mentions « joueur actuel », « joueur suivant » et « joueur précédent » sont celles des cartes. Vous appliquez les effets directement autour de la table.</p>
         <h2>Composition des paquets</h2><p>Le livret ne précise pas le nombre d’exemplaires. L’application utilise <strong>48 anomalies</strong> : 16 effets × 3 cibles, et <strong>24 quêtes</strong> : 12 de charité et 12 de chasse. Chaque combinaison a un exemplaire et la même probabilité de sortie.</p>
         <p>La pioche Anomalie est commune aux tirages individuels et à l’Altération. Les tirages se font <strong>sans remise</strong>. Le bouton « Reconstituer le paquet » remet toutes les cartes de ce paquet en jeu, après confirmation.</p>
         <p>Le livret actuel ne chiffre pas les paliers de la fresque : déclenchez l’Altération manuellement quand un palier est atteint. Les coûts et récompenses affichés sont ceux du livret, sans effet supplémentaire.</p>
-        <p>La partie est enregistrée uniquement dans ce navigateur. Elle n’est pas synchronisée entre appareils. Le journal conserve les 200 dernières opérations.</p>
+        <p>Les tirages sont enregistrés uniquement dans ce navigateur. Ils ne sont pas synchronisés entre appareils. Le journal conserve les 200 dernières opérations.</p>
         <a href="https://github.com/kitout3/livre-de-regle/blob/fa0b3f6062b680fd73b447af3642576746ec080a/index.html" target="_blank" rel="noopener">Consulter la version des règles utilisée</a>
       </div></details>
     </section>
-    <footer class="footer"><span>Quêtes & Anomalies</span><span>Un palier. Un choix. Un nouvel équilibre.</span></footer>
+    <footer class="footer"><span>Quêtes & Anomalies</span><span id="save-state">Tirages sauvegardés sur cet appareil</span></footer>
   </main>
   <div id="status" class="toast" role="status" aria-live="polite"></div>
   <dialog id="action-dialog" aria-labelledby="dialog-title"><div class="dialog-body"><p class="eyebrow" id="dialog-eyebrow">La table des tirages</p><h2 id="dialog-title"></h2><div id="dialog-content"></div><div class="dialog-actions"><button id="dialog-cancel" class="quiet-button">Annuler</button><button id="dialog-confirm" class="primary-button">Confirmer</button></div></div></dialog>
