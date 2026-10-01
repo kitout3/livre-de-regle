@@ -165,6 +165,11 @@ document.querySelectorAll('[data-mode]').forEach(tab => {
 $('#play-area').addEventListener('change', event => {
   if (event.target.id === 'player-count') updatePlayerCount(Number(event.target.value));
 });
+$('#play-area').addEventListener('input', event => {
+  if (event.target.id !== 'player-count') return;
+  const count = Number(event.target.value);
+  if (Number.isInteger(count) && count >= 2 && count <= 48) updatePlayerCount(count);
+});
 $('#play-area').addEventListener('click', event => {
   const button = event.target.closest('button[data-action]');
   if (!button || button.disabled) return;
@@ -173,7 +178,10 @@ $('#play-area').addEventListener('click', event => {
     transact(() => draw(state, mode), () => CARDS[state.last[mode]].title, true);
     $('[data-action="draw"]')?.focus();
   } else if (action === 'event') {
-    transact(() => startAlteration(state), () => `${state.playerCount} anomalies révélées.`);
+    transact(() => {
+      setPlayerCount(state, Number($('#player-count').value));
+      startAlteration(state);
+    }, () => `${state.playerCount} anomalies révélées.`);
     $('[data-action="event"]')?.focus();
   } else if (action === 'minus-player' || action === 'plus-player') {
     updatePlayerCount(state.playerCount + (action === 'plus-player' ? 1 : -1));
