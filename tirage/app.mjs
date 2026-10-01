@@ -156,11 +156,17 @@ $('#dialog-confirm').addEventListener('click', () => {
   if (action) action();
 });
 
-$('#new-game').addEventListener('click', () => showDialog({
-  title: 'Commencer une nouvelle partie ?',
-  body: '<p>Les deux paquets seront complets et mélangés. Les tirages, l’Altération en cours et le journal seront effacés. Les noms et l’ordre des joueurs seront conservés.</p>',
-  confirm: 'Nouvelle partie',
-  onConfirm: () => transact(() => { const names = [...state.players]; state = newGame(names.length); state.players = names; }, 'Les paquets sont prêts pour une nouvelle partie.'),
+$('#restart-draws').addEventListener('click', () => showDialog({
+  title: 'Recommencer tous les tirages ?',
+  body: '<p>Les 24 cartes Quête et les 48 cartes Anomalie seront remises en pioche et mélangées. Les tirages précédents, l’Altération en cours et le journal seront effacés.</p><p>Le nombre de joueurs, leurs noms, leur ordre et le joueur sélectionné seront conservés.</p>',
+  confirm: 'Recommencer les tirages',
+  onConfirm: () => transact(() => {
+    const names = [...state.players];
+    const current = state.current;
+    state = newGame(names.length);
+    state.players = names;
+    state.current = current;
+  }, 'Tirages réinitialisés : 24 quêtes et 48 anomalies prêtes à être piochées.'),
 }));
 
 function updatePlayerCount(value) {
